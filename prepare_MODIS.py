@@ -5,23 +5,17 @@ Created on Tue Mar 16 10:21:20 2021
 @author: karlo
 """
 
-import rasterio
-import pandas as pd
-import tables
+
+import modin.pandas as pd
 import geopandas as gpd
-import xarray as xr
 import os
 import matplotlib.pyplot as plt
-from osgeo import gdal
 import numpy as np
 import rioxarray as rxr
 from shapely.geometry import mapping
-import glob
 from datetime import datetime
-from pyproj import Transformer
-from rasterio.plot import show
 import datetime as dt
-import h5py
+
 
 def hdf_clip(raster_folder, shape_file):
     """
@@ -41,7 +35,7 @@ def hdf_clip(raster_folder, shape_file):
     Returns
     -------
     clipps : list of tuples
-        Clipped rasters.
+        Clipped numpy arrays.
     """
     clipps = list()
     rasters = [ras for ras in os.listdir(raster_folder) if ras.endswith(".hdf")] # lists all rasters
@@ -50,15 +44,16 @@ def hdf_clip(raster_folder, shape_file):
         doy = raster[13:16] 
         year = raster[9:13]
         xds = rxr.open_rasterio(raster_folder + raster, masked=True, chunks=True)
-        clipped = xds.rio.clip(shape.geometry.apply(mapping), shape.crs, drop=True) # clippingthe rasters
-        date_time, snow = dt.datetime.strptime(year + "-" + doy, "%Y-%j"), clipped.Maximum_Snow_Extent.values 
-        """ Creating the datetime date of the data paoint, and snow data ."""
-        date = date_time.strftime("%d.%m.%Y") 
+        clipped = xds.rio.clip(shape.geometry.apply(mapping), shape.crs, drop=True) # clipping the rasters
+        """ Creating the datetime date of the data paoint, and snow data .""" 
+        date = dt.datetime.strptime(year + "-" + doy, "%Y-%j").strftime("%d.%m.%Y")
+        snow = clipped.Maximum_Snow_Extent.values.squeeze() 
         # converting the date to string wit CRO format
         data = (date, snow) # creatingthe data tuple
         if clipps: # if list not empty
-            last_date = datetime.strptime(clipps[-1][0], "%d.%m.%Y") # checkign last entry in the list
-            diff = abs(last_date - date_time).days - 1 # calculating the number of "missing" days
+            prev_date = datetime.strptime(clipps[-1][0], "%d.%m.%Y") # checkign last entry in the list
+            now_date = datetime.strptime(date, "%d.%m.%Y") 
+            diff = abs(prev_date - now_date).days - 1 # calculating the number of "missing" days
             print ("The difference in {} days.".format(diff)) 
             if diff > 50: 
                 print ("The difference is {} days. Check the {} raster!".format(diff, date))
@@ -82,3 +77,26 @@ shape_file = "D:\\OneDrive\\Python\\12_pyModis\\basin\\Drava\\Drava_Basin.shp"
 
 
 clipps = hdf_clip(hdf_raster_folder, shape_file)
+
+np.save("test_snow_data.npy",  clipps, allow_pickle=True,)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
