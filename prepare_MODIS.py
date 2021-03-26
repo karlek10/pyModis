@@ -6,7 +6,7 @@ Created on Tue Mar 16 10:21:20 2021
 """
 
 
-import modin.pandas as pd
+import pandas as pd
 import geopandas as gpd
 import os
 import matplotlib.pyplot as plt
@@ -46,24 +46,29 @@ def hdf_clip(raster_folder, shape_file):
         xds = rxr.open_rasterio(raster_folder + raster, masked=True, chunks=True)
         clipped = xds.rio.clip(shape.geometry.apply(mapping), shape.crs, drop=True) # clipping the rasters
         """ Creating the datetime date of the data paoint, and snow data .""" 
-        date = dt.datetime.strptime(year + "-" + doy, "%Y-%j").strftime("%d.%m.%Y")
+        date = datetime.strptime(year + "-" + doy, "%Y-%j")
         snow = clipped.Maximum_Snow_Extent.values.squeeze() 
         # converting the date to string wit CRO format
         data = (date, snow) # creatingthe data tuple
         if clipps: # if list not empty
-            prev_date = datetime.strptime(clipps[-1][0], "%d.%m.%Y") # checkign last entry in the list
-            now_date = datetime.strptime(date, "%d.%m.%Y") 
-            diff = abs(prev_date - now_date).days - 1 # calculating the number of "missing" days
-            print ("The difference in {} days.".format(diff)) 
-            if diff > 50: 
-                print ("The difference is {} days. Check the {} raster!".format(diff, date))
+            prev_date = clipps[-1][0] # checkign last entry in the list
+            print (prev_date)
+            now_date = date
+            print (now_date)
+            diff = abs(prev_date - now_date) - dt.timedelta(1) # calculating the number of "missing" days
+            
+            print (type(diff))
+            print ("The difference in {}.".format(diff)) 
+            if diff > dt.timedelta(50): 
+                print ("The difference is {}. Check the {} raster!".format(diff, date))
             else:
-                for _ in range(diff): # iterating over day difference
-                    date_ = datetime.strptime(clipps[-1][0], "%d.%m.%Y") 
-                    date_time, snow = date_ + dt.timedelta(days=1), clipps[-1][1]
+                for _ in range(diff.days): # iterating over day difference
+                    date_ = clipps[-1][0]
+                    date_time, snow = date_ + dt.timedelta(1), clipps[-1][1]
                     """ Creating the datetime date of the data paoint, and 
                     copying snow data from the last entry in the list."""
-                    clipps.append((date_time.strftime("%d.%m.%Y"), snow)) # appending the copied data to the list
+                    clipps.append((date_time, snow)) # appending the copied data to the list
+                    prev_date += dt.timedelta(1)
         clipps.append(data) # appending the clipped raster data to the list 
     return clipps 
             
