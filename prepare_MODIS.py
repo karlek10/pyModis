@@ -47,18 +47,14 @@ def hdf_clip(raster_folder, shape_file):
         clipped = xds.rio.clip(shape.geometry.apply(mapping), shape.crs, drop=True) # clipping the rasters
         """ Creating the datetime date of the data paoint, and snow data .""" 
         date = datetime.strptime(year + "-" + doy, "%Y-%j")
-        snow = clipped.Maximum_Snow_Extent.values.squeeze() 
+        snow = np.nan_to_num(clipped.Maximum_Snow_Extent.values.squeeze())
         # converting the date to string wit CRO format
         data = (date, snow) # creatingthe data tuple
         if clipps: # if list not empty
             prev_date = clipps[-1][0] # checkign last entry in the list
-            print (prev_date)
             now_date = date
-            print (now_date)
             diff = abs(prev_date - now_date) - dt.timedelta(1) # calculating the number of "missing" days
-            
-            print (type(diff))
-            print ("The difference in {}.".format(diff)) 
+            print ("The difference is {}.".format(diff)) 
             if diff > dt.timedelta(50): 
                 print ("The difference is {}. Check the {} raster!".format(diff, date))
             else:
