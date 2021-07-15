@@ -66,25 +66,57 @@ def hdf_clip(raster_folder, shape_file):
                     clipps.append((date_time, snow)) # appending the copied data to the list
                     prev_date += dt.timedelta(1)
         clipps.append(data) # appending the clipped raster data to the list 
+    print("Clipping rasters has been finished. The raster have been saved to the list clipps.")
     return clipps 
             
 
+def create_raster_files(basin_name, input_folder, output_folder):
+    """
+    The function takes default Modis rasters, executes the hadf_clip function for the desired basin
+    and returns seperate .npy files for each day in the desired output folder.
 
-hdf_raster_folder = "D:\\OneDrive\\Python\\12_pyModis\\test_data_folder\\"
-shape_file = "D:\\OneDrive\\Python\\12_pyModis\\basin\\Drava\\Drava_Basin.shp"
+    Parameters
+    ----------
+    basin_name : str
+        Name of the basin (should be in basin folder).
+    input_folder : str
+        Path to the input folder with uncuit MODIS .hdf rasters.
+    output_folder : str
+        Path to the output folder.
+
+    Returns
+    -------
+    None.
+
+    """
+    hdf_raster_folder = "D:\\OneDrive\\Python\\12_pyModis\\" + input_folder + "\\"
+    shape_file = "D:\\OneDrive\\Python\\12_pyModis\\basin\\Drava\\" +basin_name +"_Basin.shp"
+    clipps = hdf_clip(hdf_raster_folder, shape_file)
+    if not os.path.isdir(output_folder +"\\"):
+        os.mkdir(output_folder +"\\")
+    for (date, raster) in clipps:
+        date = str(date)[:10]
+        np.save(output_folder + "\\" + date + ".npy", raster)
+    print ("Creating files have been finished. The files have been saved to the folder {}.".format(output_folder)) 
 
 
-#clipps = [hdf_clip(hdf_raster_folder, raster, shape_file) for raster in rasters]
 
 
-clipps = hdf_clip(hdf_raster_folder, shape_file)
-
-np.save("test_snow_data.npy",  clipps, allow_pickle=True,)
+    
 
 
 
 
 
+if __name__ == '__main__':
+    
+    basin_name = "Drava"
+    input_folder = "modis_input_all"
+    output_folder = "Drava_modis"
+    
+    clipps = create_raster_files(basin_name, input_folder, output_folder)
+    
+    
 
 
 
