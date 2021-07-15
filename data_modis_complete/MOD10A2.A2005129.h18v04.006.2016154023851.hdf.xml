@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE GranuleMetaDataFile SYSTEM "http://ecsinfo.gsfc.nasa.gov/ECSInfo/ecsmetadata/dtds/DPL/ECS/ScienceGranuleMetadata.dtd">
+<GranuleMetaDataFile>
+    <DTDVersion>1.0</DTDVersion>
+    <DataCenterId>NSIDC</DataCenterId>
+    <GranuleURMetaData>
+        <GranuleUR>SC:MOD10A2.006:93037488</GranuleUR>
+        <DbID>93037488</DbID>
+        <InsertTime>2016-11-30 01:31:49.796</InsertTime>
+        <LastUpdate>2016-11-30 01:31:49.796</LastUpdate>
+        <CollectionMetaData>
+            <ShortName>MOD10A2</ShortName>
+            <VersionID>6</VersionID>
+        </CollectionMetaData>
+        <DataFiles>
+            <DataFileContainer>
+                <DistributedFileName>MOD10A2.A2005129.h18v04.006.2016154023851.hdf</DistributedFileName>
+                <FileSize>306347</FileSize>
+                <ChecksumType>CKSUM</ChecksumType>
+                <Checksum>2624756348</Checksum>
+                <ChecksumOrigin>DPLIngst</ChecksumOrigin>
+            </DataFileContainer>
+        </DataFiles>
+        <ECSDataGranule>
+            <SizeMBECSDataGranule>0.292155</SizeMBECSDataGranule>
+            <ReprocessingPlanned>further update is anticipated</ReprocessingPlanned>
+            <ReprocessingActual>reprocessed</ReprocessingActual>
+            <LocalGranuleID>MOD10A2.A2005129.h18v04.006.2016154023851.hdf</LocalGranuleID>
+            <DayNightFlag>Day</DayNightFlag>
+            <ProductionDateTime>2016-06-02 02:38:52.000</ProductionDateTime>
+            <LocalVersionID>SCF V6.0.0</LocalVersionID>
+        </ECSDataGranule>
+        <PGEVersionClass>
+            <PGEVersion>6.0.2</PGEVersion>
+        </PGEVersionClass>
+        <RangeDateTime>
+            <RangeEndingTime>23:59:59.000000</RangeEndingTime>
+            <RangeEndingDate>2005-05-16</RangeEndingDate>
+            <RangeBeginningTime>00:00:00.000000</RangeBeginningTime>
+            <RangeBeginningDate>2005-05-09</RangeBeginningDate>
+        </RangeDateTime>
+        <SpatialDomainContainer>
+            <HorizontalSpatialDomainContainer>
+                <GPolygon>
+                    <Boundary>
+                        <Point>
+                            <PointLongitude>0.000131401253181314</PointLongitude>
+                            <PointLatitude>39.8197706210566</PointLatitude>
+                        </Point>
+                        <Point>
+                            <PointLongitude>-0.00867479214979005</PointLongitude>
+                            <PointLatitude>50.0069689864989</PointLatitude>
+                        </Point>
+                        <Point>
+                            <PointLongitude>15.5723926647109</PointLongitude>
+                            <PointLatitude>49.9989721995752</PointLatitude>
+                        </Point>
+                        <Point>
+                            <PointLongitude>13.0379032886097</PointLongitude>
+                            <PointLatitude>39.8144150819193</PointLatitude>
+                        </Point>
+                    </Boundary>
+                </GPolygon>
+            </HorizontalSpatialDomainContainer>
+        </SpatialDomainContainer>
+        <MeasuredParameter>
+            <MeasuredParameterContainer>
+                <ParameterName>Maximum Snow Extent</ParameterName>
+                <QAStats>
+                    <QAPercentMissingData>0</QAPercentMissingData>
+                    <QAPercentCloudCover>4</QAPercentCloudCover>
+                </QAStats>
+                <QAFlags>
+                    <AutomaticQualityFlag>Passed</AutomaticQualityFlag>
+                    <AutomaticQualityFlagExplanation>No automatic quality assessment done in the PGE</AutomaticQualityFlagExplanation>
+                    <ScienceQualityFlag>Not Investigated</ScienceQualityFlag>
+                    <ScienceQualityFlagExplanation>See http://landweb.nascom.nasa.gov/cgi-bin/QA_WWW/qaFlagPage.cgi?sat=terra&amp;ver=C6 for the product Science Quality status.</ScienceQualityFlagExplanation>
+                </QAFlags>
+            </MeasuredParameterContainer>
+        </MeasuredParameter>
+        <Platform>
+            <PlatformShortName>Terra</PlatformShortName>
+            <Instrument>
+                <InstrumentShortName>MODIS</InstrumentShortName>
+                <Sensor>
+                    <SensorShortName>MODIS</SensorShortName>
+                </Sensor>
+            </Instrument>
+        </Platform>
+        <PSAs>
+            <PSA>
+                <PSAName>QAPERCENTGOODQUALITY</PSAName>
+                <PSAValue>100</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>QAPERCENTOTHERQUALITY</PSAName>
+                <PSAValue>0</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>HORIZONTALTILENUMBER</PSAName>
+                <PSAValue>18</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>VERTICALTILENUMBER</PSAName>
+                <PSAValue>4</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>TileID</PSAName>
+                <PSAValue>51018004</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>SNOWCOVERPERCENT</PSAName>
+                <PSAValue>4</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>identifier_product_doi</PSAName>
+                <PSAValue>10.5067/MODIS/MOD10A2.006</PSAValue>
+            </PSA>
+            <PSA>
+                <PSAName>identifier_product_doi_authority</PSAName>
+                <PSAValue>http://dx.doi.org</PSAValue>
+            </PSA>
+        </PSAs>
+        <InputGranule>
+            <InputPointer>MOD10A1.A2005129.h18v04.006.2016152192630.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005130.h18v04.006.2016153020948.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005131.h18v04.006.2016153015511.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005132.h18v04.006.2016153082253.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005133.h18v04.006.2016153175917.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005134.h18v04.006.2016153221929.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005135.h18v04.006.2016154023146.hdf</InputPointer>
+            <InputPointer>MOD10A1.A2005136.h18v04.006.2016154023215.hdf</InputPointer>
+        </InputGranule>
+        <BrowseProduct>
+            <BrowseGranuleId>UR:10:DsShESDTUR:UR:15:DsShSciServerUR:15:[NSIDC:DSSDSRV]:22:BR:Browse.001:93037568</BrowseGranuleId>
+        </BrowseProduct>
+    </GranuleURMetaData>
+</GranuleMetaDataFile>
+
+

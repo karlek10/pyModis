@@ -90,7 +90,7 @@ def create_raster_files(basin_name, input_folder, output_folder):
 
     """
     hdf_raster_folder = "D:\\OneDrive\\Python\\12_pyModis\\" + input_folder + "\\"
-    shape_file = "D:\\OneDrive\\Python\\12_pyModis\\basin\\Drava\\" +basin_name +"_Basin.shp"
+    shape_file = "D:\\OneDrive\\Python\\12_pyModis\\basin\\" + basin_name + "\\" +basin_name +"_Basin.shp"
     clipps = hdf_clip(hdf_raster_folder, shape_file)
     if not os.path.isdir(output_folder +"\\"):
         os.mkdir(output_folder +"\\")
@@ -110,9 +110,9 @@ def create_raster_files(basin_name, input_folder, output_folder):
 
 if __name__ == '__main__':
     
-    basin_name = "Drava"
-    input_folder = "modis_input_all"
-    output_folder = "Drava_modis"
+    basin_name = "Isel"
+    input_folder = "data_modis_complete"
+    output_folder = "D:\\Isel_modis"
     
     clipps = create_raster_files(basin_name, input_folder, output_folder)
     
