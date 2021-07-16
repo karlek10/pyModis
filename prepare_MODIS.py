@@ -110,9 +110,9 @@ def create_raster_files(basin_name, input_folder, output_folder):
 
 if __name__ == '__main__':
     
-    basin_name = "Isel"
+    basin_name = "Sill"
     input_folder = "data_modis_complete"
-    output_folder = "D:\\Isel_modis"
+    output_folder = "D:\\Sill_modis"
     
     clipps = create_raster_files(basin_name, input_folder, output_folder)
     
